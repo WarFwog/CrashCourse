@@ -6,7 +6,7 @@ public class LobbyButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Play()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("LevelScreen");
     }
 
     public void Return()
