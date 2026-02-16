@@ -8,6 +8,7 @@ public class FinishLine : MonoBehaviour
         if(collision.tag =="Player")
         {
             SceneManager.LoadScene("EndScreen");
+            Debug.Log("Collisionnn");
         }
     }
 
