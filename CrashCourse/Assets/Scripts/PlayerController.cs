@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateState()
     {
-        bool isGrounded = controller.isGrounded;
-        bool crouchPressed = Keyboard.current.leftCtrlKey.isPressed;
+        var isGrounded = controller.isGrounded;
+        var crouchPressed = Keyboard.current.leftCtrlKey.isPressed;
 
         if (!isGrounded)
         {
@@ -85,24 +85,24 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        Vector2 input = Keyboard.current != null
+        var input = Keyboard.current != null
             ? new Vector2(
                 (Keyboard.current.aKey.isPressed ? -1 : 0) + (Keyboard.current.dKey.isPressed ? 1 : 0),
                 (Keyboard.current.sKey.isPressed ? -1 : 0) + (Keyboard.current.wKey.isPressed ? 1 : 0)
               )
             : Vector2.zero;
 
-        Vector3 dir = new Vector3(input.x, 0f, input.y).normalized;
+        var dir = new Vector3(input.x, 0f, input.y).normalized;
 
-        float currentSpeed = moveSpeed;
+        var currentSpeed = moveSpeed;
 
         if (_currentState == MovementState.Crouching)
             currentSpeed *= crouchSpeedMultiplier;
 
         if (dir.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(
+            var targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            var angle = Mathf.SmoothDampAngle(
                 transform.eulerAngles.y,
                 targetAngle,
                 ref _turnSmoothVelocity,
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             _horizontalVelocity = moveDir * currentSpeed;
         }
         else
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        Vector3 velocity = _horizontalVelocity + Vector3.up * _verticalVelocity;
+        var velocity = _horizontalVelocity + Vector3.up * _verticalVelocity;
         controller.Move(velocity * Time.deltaTime);
     }
 }
