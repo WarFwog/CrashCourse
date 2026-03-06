@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform cam;
+    [SerializeField] private Renderer playerRenderer;
 
     [Header("Base Movement")]
     [SerializeField] private float baseMoveSpeed = 6f;
@@ -187,6 +188,14 @@ public class PlayerController : MonoBehaviour
 
     public void ResetSpeed()
     {
+        _currentRunSpeed = baseMoveSpeed;
+    }
+
+    public void ResetMovement()
+    {
+        _verticalVelocity = 0f;
+        _horizontalVelocity = Vector3.zero;
+        _slideSpeed = 0f;
         _currentRunSpeed = baseMoveSpeed;
     }
 }
