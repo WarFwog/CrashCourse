@@ -8,54 +8,31 @@ public class PlayerController : MonoBehaviour
     {
         Normal,
         Crouching,
-        Airborne,
-        Sliding
+        Airborne
     }
 
     [Header("References")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform cam;
+    [SerializeField] private Renderer playerRenderer;
 
-    [Header("Base Movement")]
-    [SerializeField] private float baseMoveSpeed = 6f;
-    [SerializeField] private float runAcceleration = 2f;
-    [SerializeField] private float maxRunSpeed = 24f;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float turnSmoothTime = 0.1f;
-
-    [Header("Run Grace")]
-    [SerializeField] private float runGraceDuration = 0.25f;
 
     [Header("Jump / Gravity")]
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 2f;
 
-    [Header("Crouch")]
-    [SerializeField] private float crouchSpeedMultiplier = 0.5f;
-
-    [Header("Slide")]
-    [SerializeField] private float slideBoostPercent = 0.25f;   //25% boost
-    [SerializeField] private float minSlideBoost = 2f;
-    [SerializeField] private float maxSlideBoost = 8f;
-    [SerializeField] private float slideFriction = 10f;
-    [SerializeField] private float slideTriggerSpeed = 10f;
-
-    private MovementState _currentState;
+    [Header("Crouch Settings")]
+    [SerializeField] private float normalHeight = 2f;
+    [SerializeField] private float crouchHeight = 1f;
 
     private float _turnSmoothVelocity;
-    private float _verticalVelocity;
-
-    private float _currentRunSpeed;
-    private float _runGraceTimer;
-
     private Vector3 _horizontalVelocity;
-
-    private Vector3 _slideDirection;
-    private float _slideSpeed;
-
-    private void Start()
-    {
-        _currentRunSpeed = baseMoveSpeed;
-    }
+    private float _verticalVelocity;
+    private MovementState _currentState;
 
     private void Update()
     {
@@ -68,65 +45,63 @@ public class PlayerController : MonoBehaviour
     private void UpdateState()
     {
         var isGrounded = controller.isGrounded;
-        var crouchPressed = Keyboard.current.leftCtrlKey.wasPressedThisFrame;
-
-        if (_currentState == MovementState.Sliding)
-        {
-            if (_slideSpeed <= baseMoveSpeed)
-                _currentState = MovementState.Normal;
-
-            return;
-        }
+        var crouchPressed = Keyboard.current.leftCtrlKey.isPressed;
 
         if (!isGrounded)
         {
             _currentState = MovementState.Airborne;
-            return;
         }
-
-        if (crouchPressed && _currentRunSpeed >= slideTriggerSpeed)
+        else if (crouchPressed)
         {
-            StartSlide();
-            return;
+            _currentState = MovementState.Crouching;
+        }
+        else
+        {
+            _currentState = MovementState.Normal;
         }
 
-        _currentState = Keyboard.current.leftCtrlKey.isPressed ? MovementState.Crouching : MovementState.Normal;
+        ApplyCrouchSettings();
     }
 
-    private void StartSlide()
+    private void ApplyCrouchSettings()
     {
-        _currentState = MovementState.Sliding;
+        if (_currentState == MovementState.Crouching)
+        {
+            controller.height = crouchHeight;
+            controller.center = new Vector3(0, crouchHeight / 2f, 0);
 
-        _slideDirection = transform.forward;
+            if (playerRenderer != null)
+                playerRenderer.material.color = Color.blue;
+        }
+        else
+        {
+            controller.height = normalHeight;
+            controller.center = new Vector3(0, normalHeight / 2f, 0);
 
-        var boost = _currentRunSpeed * slideBoostPercent;
-        boost = Mathf.Clamp(boost, minSlideBoost, maxSlideBoost);
-
-        _slideSpeed = _currentRunSpeed + boost;
+            if (playerRenderer != null)
+                playerRenderer.material.color = Color.white;
+        }
     }
 
     private void HorizontalMovement()
     {
-        if (_currentState == MovementState.Sliding)
-        {
-            _slideSpeed -= slideFriction * Time.deltaTime;
-            _horizontalVelocity = _slideDirection * _slideSpeed;
-            return;
-        }
-
-        var input = new Vector2(
-            (Keyboard.current.aKey.isPressed ? -1 : 0) + (Keyboard.current.dKey.isPressed ? 1 : 0),
-            (Keyboard.current.sKey.isPressed ? -1 : 0) + (Keyboard.current.wKey.isPressed ? 1 : 0)
-        );
+        var input = Keyboard.current != null
+            ? new Vector2(
+                (Keyboard.current.aKey.isPressed ? -1 : 0) + (Keyboard.current.dKey.isPressed ? 1 : 0),
+                (Keyboard.current.sKey.isPressed ? -1 : 0) + (Keyboard.current.wKey.isPressed ? 1 : 0)
+              )
+            : Vector2.zero;
 
         var dir = new Vector3(input.x, 0f, input.y).normalized;
 
+        var currentSpeed = moveSpeed;
+
+        if (_currentState == MovementState.Crouching)
+            currentSpeed *= crouchSpeedMultiplier;
+
         if (dir.magnitude >= 0.1f)
         {
-            _runGraceTimer = runGraceDuration;
-
             var targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-
             var angle = Mathf.SmoothDampAngle(
                 transform.eulerAngles.y,
                 targetAngle,
@@ -137,28 +112,10 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            _currentRunSpeed += runAcceleration * Time.deltaTime;
-            _currentRunSpeed = Mathf.Clamp(_currentRunSpeed, baseMoveSpeed, maxRunSpeed);
-
-            var appliedSpeed = _currentRunSpeed;
-
-            if (_currentState == MovementState.Crouching)
-                appliedSpeed *= crouchSpeedMultiplier;
-
-            _horizontalVelocity = moveDir * appliedSpeed;
+            _horizontalVelocity = moveDir * currentSpeed;
         }
         else
         {
-            if (_runGraceTimer > 0f)
-            {
-                _runGraceTimer -= Time.deltaTime;
-            }
-            else
-            {
-                _currentRunSpeed = baseMoveSpeed;
-            }
-
             _horizontalVelocity = Vector3.zero;
         }
     }
@@ -166,10 +123,11 @@ public class PlayerController : MonoBehaviour
     private void VerticalMovement()
     {
         if (controller.isGrounded && _verticalVelocity < 0)
+        {
             _verticalVelocity = -2f;
+        }
 
         if (_currentState != MovementState.Crouching &&
-            _currentState != MovementState.Sliding &&
             Keyboard.current.spaceKey.wasPressedThisFrame &&
             controller.isGrounded)
         {
@@ -183,10 +141,5 @@ public class PlayerController : MonoBehaviour
     {
         var velocity = _horizontalVelocity + Vector3.up * _verticalVelocity;
         controller.Move(velocity * Time.deltaTime);
-    }
-
-    public void ResetSpeed()
-    {
-        _currentRunSpeed = baseMoveSpeed;
     }
 }

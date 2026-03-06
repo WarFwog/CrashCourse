@@ -7,7 +7,6 @@ public class StartButton : MonoBehaviour
     public void Playgame()
     {
         SceneManager.LoadScene("LobbyScreen");
-        
     }
 
    public void Quitgame()
