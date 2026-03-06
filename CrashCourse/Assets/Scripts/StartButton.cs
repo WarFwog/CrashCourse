@@ -1,13 +1,16 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
-{
-    public void Playgame()
+{    public void OnClickGame()
     {
-        SceneManager.LoadScene("LobbyScreen");
+       LoadingScreenManager.Instance.SwitchToScene(1);
+       // SceneManager.LoadScene("LobbyScreen");
         
+
+
     }
 
    public void Quitgame()
