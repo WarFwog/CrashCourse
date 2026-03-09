@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform cam;
     [SerializeField] private Renderer playerRenderer;
+    
+    [Header("Mobile Controls")]
+    [SerializeField] private Joystick joystick;           // ← sleep je Joystick hierop in de Inspector
 
     [Header("Base Movement")]
     [SerializeField] private float baseMoveSpeed = 6f;
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
 
     [Header("Slide")]
-    [SerializeField] private float slideBoostPercent = 0.25f;   //25% boost
+    [SerializeField] private float slideBoostPercent = 0.25f;   // 25% boost
     [SerializeField] private float minSlideBoost = 2f;
     [SerializeField] private float maxSlideBoost = 8f;
     [SerializeField] private float slideFriction = 10f;
@@ -53,9 +56,20 @@ public class PlayerController : MonoBehaviour
     private Vector3 _slideDirection;
     private float _slideSpeed;
 
+    private bool _useJoystick = true;   // Zet op false als je alleen toetsenbord wilt testen
+
     private void Start()
     {
         _currentRunSpeed = baseMoveSpeed;
+
+        // Optioneel: automatisch detecteren (handig voor builds)
+        // _useJoystick = Application.isMobilePlatform || Application.platform == RuntimePlatform.WebGLPlayer;
+        
+        if (joystick == null)
+        {
+            Debug.LogWarning("Joystick niet toegewezen in Inspector! Val terug op toetsenbord.");
+            _useJoystick = false;
+        }
     }
 
     private void Update()
@@ -115,10 +129,34 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        var input = new Vector2(
-            (Keyboard.current.aKey.isPressed ? -1 : 0) + (Keyboard.current.dKey.isPressed ? 1 : 0),
-            (Keyboard.current.sKey.isPressed ? -1 : 0) + (Keyboard.current.wKey.isPressed ? 1 : 0)
-        );
+        // ────────────────────────────────────────────────
+        // INPUT OPHALEN – joystick of toetsenbord
+        // ────────────────────────────────────────────────
+        Vector2 input = Vector2.zero;
+
+        if (_useJoystick && joystick != null)
+        {
+            input = new Vector2(joystick.Horizontal, joystick.Vertical);
+        }
+        else
+        {
+            // Fallback naar toetsenbord (WASD / arrows)
+            float h = 0f;
+            float v = 0f;
+
+            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)  h -= 1f;
+            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) h += 1f;
+            if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)  v -= 1f;
+            if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)    v += 1f;
+
+            input = new Vector2(h, v);
+        }
+
+        // Kleine extra dode zone (kan je aanpassen of verwijderen)
+        if (input.magnitude < 0.12f)
+        {
+            input = Vector2.zero;
+        }
 
         var dir = new Vector3(input.x, 0f, input.y).normalized;
 
@@ -169,9 +207,14 @@ public class PlayerController : MonoBehaviour
         if (controller.isGrounded && _verticalVelocity < 0)
             _verticalVelocity = -2f;
 
+        bool jumpPressed = Keyboard.current.spaceKey.wasPressedThisFrame;
+
+        // Later kun je hier een JumpButton toevoegen:
+        // jumpPressed |= (jumpButton != null && jumpButton.IsPressedThisFrame());
+
         if (_currentState != MovementState.Crouching &&
             _currentState != MovementState.Sliding &&
-            Keyboard.current.spaceKey.wasPressedThisFrame &&
+            jumpPressed &&
             controller.isGrounded)
         {
             _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
