@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: newscene
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.SceneTemplate.SceneTemplateAsset
+  templateScene: {fileID: 102900000, guid: 6e8ea09ffef296449a4c20542b8a5209, type: 3}
+  templateName: 
+  description: 
+  preview: {fileID: 0}
+  dependencies:
+  - dependency: {fileID: 919132149155446097, guid: 7881ef2862b91d44ebbba27492cce87d, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: f3a7eb7907517bb408ea4ccdcc4a7537, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 6193975173838799038, guid: 3635fe4b780de6448903fb8c979d314e, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: 1090d6cb875f7f548ac38759af420998, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: c21baa0c60c845249b8c0da07a5eb132, type: 3}
+    instantiationMode: 0
+  templatePipeline: {fileID: 0}
+  badge: {fileID: 0}
+  addToDefaults: 0
