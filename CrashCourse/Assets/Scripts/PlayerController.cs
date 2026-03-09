@@ -189,4 +189,12 @@ public class PlayerController : MonoBehaviour
     {
         _currentRunSpeed = baseMoveSpeed;
     }
+
+    public void ResetMovement()
+    {
+        _verticalVelocity = 0f;
+        _horizontalVelocity = Vector3.zero;
+        _slideSpeed = 0f;
+        _currentRunSpeed = baseMoveSpeed;
+    }
 }
