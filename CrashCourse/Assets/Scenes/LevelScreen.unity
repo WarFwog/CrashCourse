@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleFollowCamera
   target: {fileID: 521074530}
-  offset: {x: 0, y: 5, z: -7}
+  offset: {x: -7, y: 5, z: 0}
   followSpeed: 10
 --- !u!81 &964392666
 AudioListener:
