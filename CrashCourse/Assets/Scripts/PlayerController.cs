@@ -198,4 +198,9 @@ public class PlayerController : MonoBehaviour
         _slideSpeed = 0f;
         _currentRunSpeed = baseMoveSpeed;
     }
+    
+    public float CurrentSpeed()
+    {
+        return _horizontalVelocity.magnitude;
+    }
 }
