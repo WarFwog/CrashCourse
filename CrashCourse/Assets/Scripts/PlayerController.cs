@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform cam;
-
+    [SerializeField] private new Renderer renderer;
     [Header("Base Movement")]
     [SerializeField] private float baseMoveSpeed = 6f;
     [SerializeField] private float runAcceleration = 2f;
@@ -52,8 +53,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 _slideDirection;
     private float _slideSpeed;
 
+    private Animator animator;
+    private bool _isGrounded;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();    
         _currentRunSpeed = baseMoveSpeed;
     }
 
@@ -107,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
+
+        animator.SetBool("isMoving", true);
         if (_currentState == MovementState.Sliding)
         {
             _slideSpeed -= slideFriction * Time.deltaTime;
@@ -150,12 +157,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            animator.SetBool("isMoving", false);
             if (_runGraceTimer > 0f)
             {
+                animator.SetBool("isRunning", true);
                 _runGraceTimer -= Time.deltaTime;
             }
             else
             {
+                animator.SetBool("isRunning", false);
                 _currentRunSpeed = baseMoveSpeed;
             }
 
@@ -167,22 +177,31 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.isGrounded && _verticalVelocity < 0)
             _verticalVelocity = -2f;
+       
 
         if (_currentState != MovementState.Crouching &&
             _currentState != MovementState.Sliding &&
             Keyboard.current.spaceKey.wasPressedThisFrame &&
             controller.isGrounded)
+            
+
+
         {
+            animator.SetBool("isJumping", true);
+
             _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         _verticalVelocity += gravity * Time.deltaTime;
+        animator.SetBool("isJumping", false);
     }
 
     private void ApplyMovement()
     {
+      
         var velocity = _horizontalVelocity + Vector3.up * _verticalVelocity;
         controller.Move(velocity * Time.deltaTime);
+
     }
 
     public void ResetSpeed()
@@ -196,6 +215,6 @@ public class PlayerController : MonoBehaviour
         _horizontalVelocity = Vector3.zero;
         _slideSpeed = 0f;
         _currentRunSpeed = baseMoveSpeed;
-        
+            
     }
 }
