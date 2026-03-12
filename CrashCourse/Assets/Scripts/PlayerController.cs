@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
         Normal,
         Crouching,
         Airborne,
-        Sliding
+        Sliding,
+        Knockback
     }
 
     [Header("References")]
@@ -45,6 +46,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSlideBoost = 8f;
     [SerializeField] private float slideFriction = 10f;
     [SerializeField] private float slideTriggerSpeed = 10f;
+    
+
+    private Vector3 _knockbackVelocity;
+    private float _knockbackTimer;
 
     private MovementState _currentState;
 
@@ -59,12 +64,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 _slideDirection;
     private float _slideSpeed;
 
-    private Animator animator;
+    private Animator _animator;
     private bool _isGrounded;
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
+    private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _currentRunSpeed = baseMoveSpeed;
     }
 
@@ -78,6 +87,9 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateState()
     {
+        if (_currentState == MovementState.Knockback)
+            return;
+        
         var isGrounded = controller.isGrounded;
         var crouchPressed = Keyboard.current.leftCtrlKey.wasPressedThisFrame;
 
@@ -102,18 +114,18 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.SetBool("isCrouching", false);
+            _animator.SetBool(IsCrouching, false);
         }
 
         if (Keyboard.current.leftCtrlKey.isPressed)
         {
             _currentState = MovementState.Crouching;
-            animator.SetBool("isCrouching", true);
+            _animator.SetBool(IsCrouching, true);
         }
         else
         {
             _currentState = MovementState.Normal;
-            animator.SetBool("isCrouching", false);
+            _animator.SetBool(IsCrouching, false);
         }
 
 
@@ -133,8 +145,20 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMovement()
     {
+        if (_currentState == MovementState.Knockback)
+        {
+            _horizontalVelocity = _knockbackVelocity;
 
-        animator.SetBool("isMoving", true);
+            _knockbackTimer -= Time.deltaTime;
+
+            if (_knockbackTimer <= 0f)
+            {
+                _currentState = MovementState.Normal;
+            }
+
+            return;
+        }
+        _animator.SetBool(IsMoving, true);
         if (_currentState == MovementState.Sliding)
         {
             _slideSpeed -= slideFriction * Time.deltaTime;
@@ -178,15 +202,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.SetBool("isMoving", false);
+            _animator.SetBool(IsMoving, false);
             if (_runGraceTimer > 0f)
             {
-                animator.SetBool("isRunning", true);
+                _animator.SetBool(IsRunning, true);
                 _runGraceTimer -= Time.deltaTime;
             }
             else
             {
-                animator.SetBool("isRunning", false);
+                _animator.SetBool(IsRunning, false);
                 _currentRunSpeed = baseMoveSpeed;
             }
 
@@ -198,7 +222,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.isGrounded && _verticalVelocity < 0)
             _verticalVelocity = -2f;
-        animator.SetBool("isJumping", false);
+        _animator.SetBool(IsJumping, false);
 
 
         if (_currentState != MovementState.Crouching &&
@@ -209,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
 
         {
-            animator.SetBool("isJumping", true);
+            _animator.SetBool(IsJumping, true);
 
             _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -237,6 +261,18 @@ public class PlayerController : MonoBehaviour
         _horizontalVelocity = Vector3.zero;
         _slideSpeed = 0f;
         _currentRunSpeed = baseMoveSpeed;
-            
+    }
+    
+    public void ApplyKnockback(Vector3 direction, float force, float knockbackDuration)
+    {
+        _currentState = MovementState.Knockback;
+
+        _knockbackVelocity = (direction.normalized + Vector3.up * 0.35f) * force;
+
+        _verticalVelocity = 0f;
+
+        _knockbackTimer = knockbackDuration;
+
+        ResetSpeed();
     }
 }
