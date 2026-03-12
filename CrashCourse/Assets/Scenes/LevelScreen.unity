@@ -356,7 +356,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 19369b489d237494d81ee384c0ac40a6, type: 2}
+  - {fileID: 2100000, guid: 5368e0ea7c363534196ef0a540866bca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -752,7 +752,6 @@ GameObject:
   - component: {fileID: 1990640419}
   - component: {fileID: 1990640418}
   - component: {fileID: 1990640417}
-  - component: {fileID: 1990640421}
   - component: {fileID: 1990640422}
   m_Layer: 0
   m_Name: platform
@@ -868,22 +867,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990640415}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1990640421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990640415}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5c5a61149735b44b279fd549cebeb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::movingP
-  platform: {fileID: 1990640416}
-  startPoint: {fileID: 1970083266}
-  endPoint: {fileID: 1443889401}
-  speed: 5
 --- !u!64 &1990640422
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1090,6 +1073,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5440310968960774877, guid: 722c27055ebcf3a46a63d636445c31fb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 15cc1bea20e42a2429dedd7b15f47bc6, type: 2}
+    - target: {fileID: 7967602036280271438, guid: 722c27055ebcf3a46a63d636445c31fb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 986adfcf085c5a64caf47bd45add39cb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform cam;
     [SerializeField] private new Renderer renderer;
+
+    public PlayerController(Renderer renderer)
+    {
+        this.renderer = renderer;
+    }
+
     [Header("Base Movement")]
     [SerializeField] private float baseMoveSpeed = 6f;
     [SerializeField] private float runAcceleration = 2f;
