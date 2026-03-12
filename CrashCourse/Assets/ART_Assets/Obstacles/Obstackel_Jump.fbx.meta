@@ -3,7 +3,12 @@ guid: de112af0c692bde46b8f484508468d9b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fench
+    second: {fileID: 2100000, guid: a7081bc2a319a564c9a0199c90af6db2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

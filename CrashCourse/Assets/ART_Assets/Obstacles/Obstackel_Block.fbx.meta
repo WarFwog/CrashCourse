@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: e8cf296f314b4654aaf6a93e779a895e
+guid: cf8fe0dc68fd4e148b6625daa661aad0
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fench
+    second: {fileID: 2100000, guid: a7081bc2a319a564c9a0199c90af6db2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
