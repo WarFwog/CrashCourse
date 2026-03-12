@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d838271bbf064004bb88276fc3a517d8
+guid: 60ad17118865a6245beaf368ee6306b8
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Hammer_Swing
-      takeName: Scene
-      internalID: -623603649343465320
-      firstFrame: 1
-      lastFrame: 40
+      name: Hammer_Animation
+      takeName: Cylinder|CylinderAction
+      internalID: -88723805440604879
+      firstFrame: 0
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -129,7 +129,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
