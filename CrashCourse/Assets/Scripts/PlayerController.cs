@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();
         _currentRunSpeed = baseMoveSpeed;
     }
 
@@ -99,8 +100,23 @@ public class PlayerController : MonoBehaviour
             StartSlide();
             return;
         }
+        else
+        {
+            animator.SetBool("isCrouching", false);
+        }
 
-        _currentState = Keyboard.current.leftCtrlKey.isPressed ? MovementState.Crouching : MovementState.Normal;
+        if (Keyboard.current.leftCtrlKey.isPressed)
+        {
+            _currentState = MovementState.Crouching;
+            animator.SetBool("isCrouching", true);
+        }
+        else
+        {
+            _currentState = MovementState.Normal;
+            animator.SetBool("isCrouching", false);
+        }
+
+
     }
 
     private void StartSlide()
@@ -182,7 +198,8 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.isGrounded && _verticalVelocity < 0)
             _verticalVelocity = -2f;
-       
+        animator.SetBool("isJumping", false);
+
 
         if (_currentState != MovementState.Crouching &&
             _currentState != MovementState.Sliding &&
@@ -198,7 +215,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _verticalVelocity += gravity * Time.deltaTime;
-        animator.SetBool("isJumping", false);
+      
     }
 
     private void ApplyMovement()
