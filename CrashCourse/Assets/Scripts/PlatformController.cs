@@ -3,35 +3,23 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     public Transform posA, posB;
-    public float Speed = 2f;
+    public float speed = 2f;
 
-    Vector3 targetPos;
+    Vector3 target;
 
     void Start()
     {
-        targetPos = posB.position;
+        target = posB.position;
     }
 
     void Update()
     {
         if (Vector3.Distance(transform.position, posA.position) < 0.1f)
-            targetPos = posB.position;
+            target = posB.position;
 
         if (Vector3.Distance(transform.position, posB.position) < 0.1f)
-            targetPos = posA.position;
+            target = posA.position;
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, Speed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.CompareTag("Player"))
-            collision.transform.SetParent(transform);
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.CompareTag("Player"))
-            collision.transform.SetParent(null);
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
 }
