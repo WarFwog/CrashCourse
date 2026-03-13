@@ -7,7 +7,14 @@ public class RespawnController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+       else
+        {
+           
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -18,7 +25,7 @@ public class RespawnController : MonoBehaviour
         }
     }
 
-    private void RespawnPlayer(GameObject player)
+    public void RespawnPlayer(GameObject player)
     {
         CharacterController controller = player.GetComponent<CharacterController>();
         PlayerController movement = player.GetComponent<PlayerController>();
