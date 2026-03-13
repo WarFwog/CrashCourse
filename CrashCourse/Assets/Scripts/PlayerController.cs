@@ -1,6 +1,6 @@
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.HID.HID;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -10,8 +10,16 @@ public class PlayerController : MonoBehaviour
         Normal,
         Crouching,
         Airborne,
-        Sliding
+        Sliding,
+        Knockback
     }
+
+    [Header("Mobile Controls")]
+    [SerializeField] private Joystick joystick;           // ← drag your Joystick here
+
+    [Header("UI Buttons")]
+    [SerializeField] private Button jumpButton;           // ← optional reference
+    [SerializeField] private Button crouchButton;         // ← optional reference
 
     [Header("References")]
     [SerializeField] private CharacterController controller;
@@ -47,7 +55,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slideTriggerSpeed = 10f;
 
     private MovementState _currentState;
-
+    private bool _useJoystick = true;
     private float _turnSmoothVelocity;
     private float _verticalVelocity;
 
@@ -66,6 +74,15 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         _currentRunSpeed = baseMoveSpeed;
+
+        _currentRunSpeed = baseMoveSpeed;
+        _useJoystick = true;   // change to false if you only want keyboard
+
+        if (joystick == null)
+        {
+            Debug.LogWarning("Joystick not assigned!");
+            _useJoystick = false;
+        }
     }
 
     private void Update()
@@ -130,6 +147,12 @@ public class PlayerController : MonoBehaviour
 
         _slideSpeed = _currentRunSpeed + boost;
     }
+
+    private bool _jumpRequested = false;
+    private bool _crouchHeld = false;           // true while finger is down on crouch button
+    private bool _previousCrouchInput = false;  // used to detect "just pressed" for slide
+
+   
 
     private void HorizontalMovement()
     {
