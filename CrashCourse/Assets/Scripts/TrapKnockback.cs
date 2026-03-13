@@ -12,7 +12,7 @@ public class TrapKnockback : MonoBehaviour
 
         var player = other.GetComponent<PlayerController>();
 
-        if (player != null)
-            player.ApplyKnockback(transform.forward, knockbackForce, knockbackDuration);
+        if (player != null) ;
+            //player.ApplyKnockback(transform.forward, knockbackForce, knockbackDuration);
     }
 }

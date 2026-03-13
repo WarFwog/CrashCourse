@@ -3080,7 +3080,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 559398557}
   m_SourcePrefab: {fileID: 100100000, guid: 2ff83bfac1f353e4db1e17268b623dec, type: 3}
-<<<<<<< HEAD
 --- !u!1 &568948328 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 085ad025b91ca0502941d553972cb4ce, type: 3}
@@ -3088,15 +3087,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &568948329
 BoxCollider:
-=======
---- !u!1 &577311966
-GameObject:
->>>>>>> feature/RollingLogsAndKnockbackTestForMerge
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 568948328}
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -3117,49 +3111,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 085ad025b91ca0502941d553972cb4ce, type: 3}
   m_PrefabInstance: {fileID: 1624620648}
   m_PrefabAsset: {fileID: 0}
-=======
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 577311968}
-  - component: {fileID: 577311967}
-  m_Layer: 0
-  m_Name: LogSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &577311967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577311966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b682dee4558379b45b16e9299a1b529a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LogSpawner
-  logPrefab: {fileID: 474966326294054970, guid: 2b44339ce0f128e2faa222911b54b5b5, type: 3}
-  spawnInterval: 5
-  spawnHeight: 1.5
---- !u!4 &577311968
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577311966}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.024, y: 7.09, z: -33.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> feature/RollingLogsAndKnockbackTestForMerge
 --- !u!1 &587054465 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 085ad025b91ca0502941d553972cb4ce, type: 3}
@@ -5170,7 +5121,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2212009239438826721, guid: 8531d488e5c05016d9e11c5b71fcc6c3, type: 3}
-<<<<<<< HEAD
 --- !u!1001 &1003904031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5301,8 +5251,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 408290175}
   m_SourcePrefab: {fileID: 100100000, guid: dc707bf76f1bc5d4b8c6a4880b2b0ee7, type: 3}
-=======
->>>>>>> feature/RollingLogsAndKnockbackTestForMerge
 --- !u!1001 &1020083505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5608,7 +5556,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8018325739609094194, guid: b08bfa3d68671f6d1bfa87bd7ca4d5c6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1518582333}
+      addedObject: {fileID: 1518582331}
   m_SourcePrefab: {fileID: 100100000, guid: b08bfa3d68671f6d1bfa87bd7ca4d5c6, type: 3}
 --- !u!1001 &1065530305
 PrefabInstance:
@@ -6803,13 +6751,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255587920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15304591, y: 0.6903456, z: -0.15304591, w: 0.6903456}
+  m_LocalRotation: {x: 0.06446845, y: 0.6726607, z: -0.058353316, w: 0.73482394}
   m_LocalPosition: {x: -104, y: 6, z: -31.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 25, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.977, y: 84.947, z: 0.057}
 --- !u!114 &1255587924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7422,58 +7370,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 60d8f29589c334f6998afecc6a9022a8, type: 3}
-<<<<<<< HEAD
 --- !u!1001 &1374015071
-=======
---- !u!1 &1386413724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1386413726}
-  - component: {fileID: 1386413725}
-  m_Layer: 0
-  m_Name: LogSpawner (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1386413725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386413724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b682dee4558379b45b16e9299a1b529a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LogSpawner
-  logPrefab: {fileID: 474966326294054970, guid: 2b44339ce0f128e2faa222911b54b5b5, type: 3}
-  spawnInterval: 5
-  spawnHeight: 1.5
---- !u!4 &1386413726
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386413724}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.024, y: 7.09, z: -30.14}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1418522833
->>>>>>> feature/RollingLogsAndKnockbackTestForMerge
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8151,8 +8048,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8018325739609094194, guid: b08bfa3d68671f6d1bfa87bd7ca4d5c6, type: 3}
   m_PrefabInstance: {fileID: 1054961270}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &1518582333
-CapsuleCollider:
+--- !u!64 &1518582331
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8169,11 +8066,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &1538442018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10237,53 +10133,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 296754273}
   m_SourcePrefab: {fileID: 100100000, guid: 5db5553dd3e50008ba1362d5cb86ccfe, type: 3}
---- !u!1 &1936986609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1936986611}
-  - component: {fileID: 1936986610}
-  m_Layer: 0
-  m_Name: LogSpawner (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1936986610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936986609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b682dee4558379b45b16e9299a1b529a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LogSpawner
-  logPrefab: {fileID: 474966326294054970, guid: 2b44339ce0f128e2faa222911b54b5b5, type: 3}
-  spawnInterval: 5
-  spawnHeight: 1.5
---- !u!4 &1936986611
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936986609}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.024, y: 7.09, z: -26.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1939663412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11377,7 +11226,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1370877613}
   m_SourcePrefab: {fileID: 100100000, guid: 13aa20d97691eadd8a887e2ca304a236, type: 3}
-<<<<<<< HEAD
 --- !u!1 &2113545418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 474966326294054970, guid: 2b44339ce0f128e2faa222911b54b5b5, type: 3}
@@ -11439,8 +11287,6 @@ Transform:
   - {fileID: 1747569234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -177.651, z: 0}
-=======
->>>>>>> feature/RollingLogsAndKnockbackTestForMerge
 --- !u!1001 &2119206933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11673,10 +11519,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1255587923}
-    - target: {fileID: 4023980783983438751, guid: 9f387e14b504c084eb0d7dd653fbc5e6, type: 3}
-      propertyPath: knockbackDuration
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8339848754773062740, guid: 9f387e14b504c084eb0d7dd653fbc5e6, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -12055,9 +11897,8 @@ SceneRoots:
   - {fileID: 2003173943}
   - {fileID: 2128191319}
   - {fileID: 567644186}
-  - {fileID: 577311968}
-  - {fileID: 1386413726}
-  - {fileID: 1936986611}
+  - {fileID: 1054961270}
+  - {fileID: 1003904031}
   - {fileID: 1342875412}
   - {fileID: 1341342942}
   - {fileID: 1146811502}
@@ -12141,7 +11982,6 @@ SceneRoots:
   - {fileID: 1956756554}
   - {fileID: 944159605}
   - {fileID: 3245724734382805824}
-<<<<<<< HEAD
   - {fileID: 1810107064}
   - {fileID: 858845954}
   - {fileID: 1015703869}
@@ -12153,11 +11993,3 @@ SceneRoots:
   - {fileID: 1750635014}
   - {fileID: 398907670}
   - {fileID: 2119033861}
-=======
-  - {fileID: 836370250}
-  - {fileID: 1829623580}
-  - {fileID: 673410531}
-  - {fileID: 416487513}
-  - {fileID: 1273163082}
-  - {fileID: 1054961270}
->>>>>>> feature/RollingLogsAndKnockbackTestForMerge

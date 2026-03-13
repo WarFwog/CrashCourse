@@ -33,7 +33,6 @@ public class RespawnController : MonoBehaviour
         if (controller != null)
             controller.enabled = false;
 
-        Debug.Log("test");
         player.transform.position = respawnPoint.position;
 
         if (movement != null)
